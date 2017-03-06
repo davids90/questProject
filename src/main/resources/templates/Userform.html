@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title>Insert title here</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+<!--  <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <link href="resources/css/bootstrap-3.3.2-dist/bootstrap.min.css" rel="stylesheet" />
+  -->
+
+	 <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+ 
+  
+   	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  	<!--  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"></link>-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+
+</head>
+<body>
+<div class="container">
+
+	<h2>User Form</h2>
+	
+	
+	<form class="form-horizontal" th:object="${user}" th:action="@{/user}" method="post">
+	
+		<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                <p th:text="#{form.hasErrors}">Error Message</p>
+		</div>
+	
+		<div class="form-group" th:class="${#fields.hasErrors('name')} ? 'form-group has-error' : 'form-group'">
+                <label class="col-sm-2 control-label">Name:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{name}"/>
+                    
+                    <span class="help-block">
+                       <ul>
+                           <li th:each="err : ${#fields.errors('name')}" th:text="${err}" />
+                       </ul>
+					</span>
+
+                </div>
+		</div>
+	
+	
+		<div class="form-group" th:class="${#fields.hasErrors('pps')} ? 'form-group has-error' : 'form-group'">
+		<label class="col-sm-2 control-label">PPS:</label>
+                <div class="col-sm-10 ">
+					<input type="text" class="form-control" th:field="*{pps}"/>
+					
+					<span class="help-block">
+                       <ul>
+                           <li th:each="err : ${#fields.errors('pps')}" th:text="${err}" />
+                       </ul>
+					</span>
+					
+				</div>	
+		</div>
+		
+		 <div class="form-group" th:class="${#fields.hasErrors('dateOfBirth')} ? 'form-group has-error' : 'form-group'">
+                <label class="col-sm-2 control-label">Date Of Birth:</label>
+                <div class="col-sm-10">
+                     <input class="date form-control" type="date" required="required" th:field="*{dateOfBirth}"></input>
+                     
+                      <span class="help-block">
+                       <ul>
+                           <li th:each="err : ${#fields.errors('dateOfBirth')}" th:text="${err}" />
+                       </ul>
+					</span>
+					
+                </div>
+		</div>
+		
+		 <div class="form-group" th:class="${#fields.hasErrors('mobilePhoneNumber')} ? 'form-group has-error' : 'form-group'">
+                <label class="col-sm-2 control-label">Phone No:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="mobileNo form-control" th:field="*{mobilePhoneNumber}"/>
+                    
+                    <span class="help-block">
+                       <ul>
+                           <li th:each="err : ${#fields.errors('mobilePhoneNumber')}" th:text="${err}" />
+                       </ul>
+					</span>
+					
+                </div>
+		</div>
+		
+	 <div class="row">
+                <button type="submit" class="btn btn-default">Submit</button>
+	</div>
+	
+	</form>
+	
+	
+
+</div>
+
+<script>
+    /*<![CDATA[*/
+    	
+    	
+   $(function(){
+	    var currentDate = new Date();
+
+	    var month = currentDate.getMonth() + 1;
+	    var day = currentDate.getDate();
+	    var year = currentDate.getFullYear();
+
+	    if(month < 10)
+	        month = '0' + month.toString();
+	    if(day < 10)
+	        day = '0' + day.toString();
+
+	    var maxDate = year + '-' + month + '-' + day;    
+	    $('.date').attr('max', maxDate);
+	});
+    
+   
+
+    /*]]>*/
+</script>
+
+</body>
+</html>

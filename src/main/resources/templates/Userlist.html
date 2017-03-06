@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"></meta>
+<title>Insert title here</title>
+
+<link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <link href="../../static/css/spring-core.css"
+th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>
+
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"></link>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+</head>
+<body>
+<div class="container">
+
+
+<div th:if="${#lists.isEmpty(users)}">
+   <h3>No records have been created</h3>
+</div>
+
+ 
+ <div th:if="${not #lists.isEmpty(users)}">
+
+	<h2>User List</h2>
+	
+	<table class="table table-striped">
+            <tr>
+                <th>Name</th>
+                <th>PPS</th>
+                <th>Date of Birth</th>
+                <th>Phone No</th>
+            </tr>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.pps}"></td>
+                <td class="date" th:text="${#dates.format(user.dateOfBirth, 'dd-MM-yyyy')}"></td> 
+                <td th:text="${user.mobilePhoneNumber}"></td>            
+            </tr>
+</table>
+	
+	</div>
+	
+<a th:href="${'/'}">Home</a>
+	
+	
+
+</div>
+
+<script>
+    /*<![CDATA[*/
+    	
+    
+
+    /*]]>*/
+</script>
+</body>
+</html>
